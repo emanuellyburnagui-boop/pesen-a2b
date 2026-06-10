@@ -29,11 +29,28 @@ h2 {
     text-align: center;
 }
 
-/* Barra de Controles (Busca + Botão) */
+/* Barra de Controles (Horário + Busca + Botão) */
 .controles {
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.grupo-controle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+#horarioPadrao {
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
 }
 
 #buscaAluno {
@@ -68,6 +85,44 @@ h2 {
     background-color: #be123c;
 }
 
+/* Estrutura das Abas */
+.abas-container {
+    display: flex;
+    gap: 5px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.aba-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.aba-btn:hover {
+    color: #4f46e5;
+}
+
+.aba-btn.ativa {
+    color: #4f46e5;
+    border-bottom: 2px solid #4f46e5;
+}
+
+.aba-conteudo {
+    display: none;
+}
+
+.aba-conteudo.ativa {
+    display: block;
+}
+
 /* Estilização da Tabela */
 .tabela-chamada {
     width: 100%;
@@ -90,11 +145,28 @@ h2 {
     background-color: #f8fafc;
 }
 
+/* Input seletor de tempo dentro da tabela */
+.input-hora-tabela {
+    border: 1px dashed #cbd5e1;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background: #f8fafc;
+    font-family: inherit;
+    font-weight: 600;
+    color: #334155;
+    outline: none;
+}
+
 /* Alinhamento de colunas */
 .tabela-chamada td:nth-child(1), .tabela-chamada th:nth-child(1),
 .tabela-chamada td:nth-child(3), .tabela-chamada th:nth-child(3),
 .tabela-chamada td:nth-child(4), .tabela-chamada th:nth-child(4) {
     text-align: center;
+}
+
+/* Estilo específico para a tabela cronológica (inverte ordem das colunas centrais) */
+.tabela-cronologica td:nth-child(3), .tabela-cronologica th:nth-child(3) {
+    text-align: left;
 }
 
 /* Tags / Botões de Status */
@@ -105,6 +177,7 @@ h2 {
     font-weight: bold;
     border: none;
     cursor: pointer;
+    min-width: 85px;
 }
 
 .presente {
@@ -113,12 +186,32 @@ h2 {
 }
 
 .ausente {
-    background-color: #fee2e2;
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+/* REGRA DE ATRASO: Linha vermelha para alunos ausentes cujo horário expirou */
+.linha-atrasada {
+    background-color: #fee2e2 !important;
+    color: #991b1b;
+}
+
+.linha-atrasada .status {
+    background-color: #ef4444;
+    color: white;
+}
+
+.linha-atrasada .input-hora-tabela {
+    background-color: #fca5a5;
+    border-color: #ef4444;
     color: #991b1b;
 }
 
 /* Ajustes específicos para quando o PDF for gerado */
+.modo-impressao .aba-conteudo {
+    display: block !important;
+    margin-bottom: 40px;
+}
 .modo-impressao .status {
     border: 1px solid currentColor;
 }
-

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Chamada com Exportação PDF</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Biblioteca necessária para gerar o PDF diretamente no navegador -->
+    <!-- Biblioteca oficial corrigida para gerar o PDF diretamente no navegador -->
     <script src="https://cloudflare.com"></script>
 </head>
 <body>
@@ -13,31 +13,62 @@
     <div class="container-tabela">
         <h2>Lista de Chamada</h2>
         
-        <!-- Controles: Busca e Botão de PDF -->
+        <!-- Controles: Horário Padrão, Busca e Botão de PDF -->
         <div class="controles">
+            <div class="grupo-controle">
+                <label for="horarioPadrao">Horário Padrão:</label>
+                <input type="time" id="horarioPadrao" value="19:30">
+            </div>
             <input type="text" id="buscaAluno" placeholder="🔍 Buscar aluno pelo nome...">
             <button id="btnExportar" onclick="exportarParaPDF()">📄 Exportar PDF</button>
         </div>
 
+        <!-- Menu de Navegação entre Abas -->
+        <div class="abas-container">
+            <button id="btn-aba-chamada" class="aba-btn ativa" onclick="mudarAba('aba-chamada')">Diário de Chamada</button>
+            <button id="btn-aba-horarios" class="aba-btn" onclick="mudarAba('aba-horarios')">Ordem por Horário</button>
+        </div>
+
         <!-- Área que será capturada pelo PDF -->
         <div id="conteudoImpressao">
-            <table class="tabela-chamada">
-                <thead>
-                    <tr>
-                        <th>Nº</th>
-                        <th>Nome do Aluno</th>
-                        <th>Horário</th>
-                        <th>Presença</th>
-                    </tr>
-                </thead>
-                <tbody id="corpoTabela">
-                    <!-- Os 36 alunos serão gerados aqui pelo JS -->
-                </tbody>
-            </table>
+            
+            <!-- ABA 1: DIÁRIO DE CHAMADA PRINCIPAL -->
+            <div id="aba-chamada" class="aba-conteudo ativa">
+                <table class="tabela-chamada">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>Nome do Aluno</th>
+                            <th>Horário Previsto</th>
+                            <th>Presença</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabela">
+                        <!-- Os 36 alunos serão gerados aqui pelo JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ABA 2: LISTA POR ORDEM CRONOLÓGICA DE HORÁRIO -->
+            <div id="aba-horarios" class="aba-conteudo">
+                <table class="tabela-chamada tabela-cronologica">
+                    <thead>
+                        <tr>
+                            <th>Horário Previsto</th>
+                            <th>Nº</th>
+                            <th>Nome do Aluno</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaHorarios">
+                        <!-- Ordenação gerada dinamicamente pelo JS -->
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
