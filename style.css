@@ -1,1 +1,124 @@
+/* Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Container da Tabela */
+.container-tabela {
+    width: 100%;
+    max-width: 850px;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Barra de Controles (Busca + Botão) */
+.controles {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#buscaAluno {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#buscaAluno:focus {
+    border-color: #4f46e5;
+}
+
+/* Botão de Exportar PDF */
+#btnExportar {
+    background-color: #e11d48;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+#btnExportar:hover {
+    background-color: #be123c;
+}
+
+/* Estilização da Tabela */
+.tabela-chamada {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabela-chamada th, .tabela-chamada td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tabela-chamada th {
+    background-color: #4f46e5;
+    color: white;
+    font-weight: 600;
+}
+
+.tabela-chamada tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Alinhamento de colunas */
+.tabela-chamada td:nth-child(1), .tabela-chamada th:nth-child(1),
+.tabela-chamada td:nth-child(3), .tabela-chamada th:nth-child(3),
+.tabela-chamada td:nth-child(4), .tabela-chamada th:nth-child(4) {
+    text-align: center;
+}
+
+/* Tags / Botões de Status */
+.status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.presente {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.ausente {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Ajustes específicos para quando o PDF for gerado */
+.modo-impressao .status {
+    border: 1px solid currentColor;
+}
 

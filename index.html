@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Chamada com Exportação PDF</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca necessária para gerar o PDF diretamente no navegador -->
+    <script src="https://cloudflare.com"></script>
+</head>
+<body>
+
+    <div class="container-tabela">
+        <h2>Lista de Chamada</h2>
+        
+        <!-- Controles: Busca e Botão de PDF -->
+        <div class="controles">
+            <input type="text" id="buscaAluno" placeholder="🔍 Buscar aluno pelo nome...">
+            <button id="btnExportar" onclick="exportarParaPDF()">📄 Exportar PDF</button>
+        </div>
+
+        <!-- Área que será capturada pelo PDF -->
+        <div id="conteudoImpressao">
+            <table class="tabela-chamada">
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>Nome do Aluno</th>
+                        <th>Horário</th>
+                        <th>Presença</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+                    <!-- Os 36 alunos serão gerados aqui pelo JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
