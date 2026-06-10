@@ -1,12 +1,12 @@
 // Lista gerada dinamicamente com 36 alunos para poupar espaço no código fonte
 const nomesExemplo = [
-    "Ana Silva", "Bruno Santos", "Carlos Lima", "Diana Costa", "Eduardo Souza",
-    "Fernanda Oliveira", "Gabriel Rodrigues", "Helena Almeida", "Igor Pereira", "Julia Carvalho",
-    "Kevin Ribeiro", "Larissa Fernandes", "Matheus Gomes", "Nathalia Martins", "Otávio Araújo",
-    "Patrícia Melo", "Queren Hapuque", "Rafael Castro", "Sabrina Barbosa", "Thiago Rocha",
-    "Úrsula Mendes", "Vitor Correia", "Wesley Cardoso", "Xavier Teixeira", "Yasmin Nunes",
-    "Zeca Pinto", "Arthur Moraes", "Beatriz Farias", "Caio Antunes", "Davina Lopes",
-    "Erick Vieira", "Gabriela Machado", "Heitor Marques", "Isabela Ramos", "João Pedro", "Laura Lima"
+    "Alicia Ribas", "André Max", "Anthony Cardoso", "Antonio Miguel", "Brayan Souza",
+    "Brayan Vinicios", "Caio Gabriel", "Carlos Eduardo", "Daniel Jesus", "Emanuelly Burnagui",
+    "Enzo Gabriel", "Gabriel Carlos", "Gilyane de Souza", "Guilherme Vieira", "Igor Boinovski",
+    "João Victor de Jesus", "João Vitor Fragoso", "Julia Diniz", "Lucas Peppes", "Luiz Eduardo",
+    "Mateus Camargo", "Matheus Henrique", "Nathaly borowski", "Natally Rafaela", "Nicolas Daniel",
+    "Paulo Henrique", "Pedro de França", "Pedro Henrique Covaleski", "Pedro Henrique Lisboa", "Sabryna da Silva",
+    "Samuel de Goes", "Savio Henrique", "Vinicius Kenji", "Willian Souza", "Yasmin Rodrigues", "Yngrid Paola"
 ];
 
 const inputHorarioPadrao = document.getElementById('horarioPadrao');
