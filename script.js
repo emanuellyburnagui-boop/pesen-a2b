@@ -1,4 +1,4 @@
-// Lista gerada dinamicamente com 36 alunos para poupar espaço no código fonte
+// Lista gerada dinamicamente com 36 alunos
 const nomesExemplo = [
     "Alicia Ribas", "André Max", "Anthony Cardoso", "Antonio Miguel", "Brayan Souza",
     "Brayan Vinicios", "Caio Gabriel", "Carlos Eduardo", "Daniel Jesus", "Emanuelly Burnagui",
@@ -14,14 +14,19 @@ const corpoTabela = document.getElementById('corpoTabela');
 const corpoTabelaHorarios = document.getElementById('corpoTabelaHorarios');
 const buscaInput = document.getElementById('buscaAluno');
 
-// Define a estrutura padrão inicial dos 36 alunos baseado no valor atual do input de horário padrão
-const alunosIniciais = nomesExemplo.map((nome, index) => {
-    const numeroChamada = String(index + 1).padStart(2, '0');
-    return { id: numeroChamada, nome: nome, horario: inputHorarioPadrao.value, presente: false };
-});
+// 1. TENTA CARREGAR OS DADOS SALVOS PRIMEIRO
+let listaAlunos = JSON.parse(localStorage.getItem('chamadaAlunos'));
 
-// Carrega os dados salvos no navegador ou usa a estrutura inicial criada
-let listaAlunos = JSON.parse(localStorage.getItem('chamadaAlunos')) || alunosIniciais;
+// 2. SE NÃO EXISTIR NADA SALVO, CRIA A LISTA INICIAL COM O HORÁRIO PADRÃO ATUAL
+if (!listaAlunos || listaAlunos.length === 0) {
+    const horarioPadraoInicial = inputHorarioPadrao ? inputHorarioPadrao.value : "08:00";
+    listaAlunos = nomesExemplo.map((nome, index) => {
+        const numeroChamada = String(index + 1).padStart(2, '0');
+        return { id: numeroChamada, nome: nome, horario: horarioPadraoInicial, presente: false };
+    });
+    // Salva imediatamente a estrutura inicial para não dar conflito
+    localStorage.setItem('chamadaAlunos', JSON.stringify(listaAlunos));
+}
 
 // Função auxiliar que valida se o horário programado do aluno expirou comparado ao relógio atual
 function verificarSeEstaAtrasado(aluno) {
@@ -47,7 +52,7 @@ function renderizarTabela() {
     const listaAba1Ordenada = [...listaAlunos].sort((a, b) => {
         const atrasadoA = verificarSeEstaAtrasado(a);
         const atrasadoB = verificarSeEstaAtrasado(b);
-        return atrasadoB - atrasadoA; // Transforma boolean em pesos booleanos (true vem primeiro)
+        return atrasadoB - atrasadoA; 
     });
 
     listaAba1Ordenada.forEach((aluno) => {
@@ -64,6 +69,8 @@ function renderizarTabela() {
 
         const classeStatus = aluno.presente ? 'status presente' : 'status ausente';
         const textoStatus = aluno.presente ? 'Presente' : 'Ausente';
+        
+        // CORREÇÃO CRÍTICA: Busca pelo ID único e não por ordenação de tela para evitar trocar dados de alunos
         const indiceReal = listaAlunos.findIndex(a => a.id === aluno.id);
 
         linha.innerHTML = `
@@ -81,7 +88,6 @@ function renderizarTabela() {
     // --- RENDERIZAÇÃO DA ABA 2: LISTA POR ORDEM DE HORÁRIO ---
     corpoTabelaHorarios.innerHTML = '';
 
-    // Regra: Duplica a lista original e a ordena de maneira estritamente cronológica crescente pelo horário
     const listaAba2Cronologica = [...listaAlunos].sort((a, b) => a.horario.localeCompare(b.horario));
 
     listaAba2Cronologica.forEach((aluno) => {
@@ -108,13 +114,16 @@ function renderizarTabela() {
 }
 
 // Evento disparado quando o usuário altera o horário global visual na tela
-inputHorarioPadrao.addEventListener('change', (evento) => {
-    const novoHorarioGlobal = evento.target.value;
-    listaAlunos.forEach(aluno => {
-        aluno.horario = novoHorarioGlobal;
+if (inputHorarioPadrao) {
+    inputHorarioPadrao.addEventListener('change', (evento) => {
+        const novoHorarioGlobal = evento.target.value;
+        // Altera apenas os horários, mantendo o status de presença intacto
+        listaAlunos.forEach(aluno => {
+            aluno.horario = novoHorarioGlobal;
+        });
+        salvarDadosESincronizar();
     });
-    salvarDadosESincronizar();
-});
+}
 
 // Atualiza o horário de um único aluno diretamente pelo input presente na tabela
 window.atualizarHorarioIndividual = function(index, novoHorario) {
@@ -167,7 +176,9 @@ window.exportarParaPDF = function() {
 };
 
 // Filtro de digitação da barra de pesquisa
-buscaInput.addEventListener('input', renderizarTabela);
+if (buscaInput) {
+    buscaInput.addEventListener('input', renderizarTabela);
+}
 
 // Monitora o relógio do sistema a cada 15 segundos para atualizar os atrasados sem precisar recarregar
 setInterval(renderizarTabela, 15000);
